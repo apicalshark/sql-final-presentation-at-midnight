@@ -1,0 +1,31 @@
+# version: '3.8' # version number is obsolete
+services:
+  web:
+    build: apache
+    container_name: web
+    ports:
+      - "80:80"
+    volumes:
+      - type: bind
+        source: html
+        target: /var/www/html
+        read_only: true
+    restart: unless-stopped
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      # sa just works
+      MSSQL_SA_PASSWORD: "I!am@password"
+      MSSQL_PID: Express
+      MSSQL_AGENT_ENABLED: "true"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserverdata:/var/opt/mssql
+    restart: unless-stopped
+
+volumes:
+  sqlserverdata:
