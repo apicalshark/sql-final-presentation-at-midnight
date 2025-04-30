@@ -1,3 +1,6 @@
 *.docx*
 *.sh*
 *.sql*
+*.odt*
+*.odp*
+*.~lock*

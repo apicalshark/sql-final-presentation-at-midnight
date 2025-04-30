@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[]線上採購系統</title>
+    <link href="style/adminpage.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="header">
+        <h1>[]線上採購系統</h1>
+        <p class="copy">資料管理系統後台</p>
+        <ul id="navi">
+            <li id="navi_01">
+                <a href="">首頁</a>
+                <!-- Dropdown-->
+                <ul id="navi_dropdown">
+                    <li><a href="">首頁子選單1</a></li>
+                    <li><a href="">首頁子選單2</a></li>
+                    <li><a href="">首頁子選單3</a></li>
+                </ul>
+            </li>
+            <li id="navi_02"><a href="">SQL管理</a></li>
+            <li id="navi_03"><a href="">網頁狀態</a></li>
+            <li id="navi_04"><a href="">admin</a></li>
+            <li id="navi_05"><a href="">logout</a></li>
+        </ul>
+    </div>
+    <br>
+    <div id="form-container">
+        <center>
+            <h2>[]線上採購系統</h2>
+        </center>
+        <form method="post">
+            <div>
+                <label for="user">商品名稱或編號:</label>
+                <input type="text" id="user" name="user" size="8">
+            </div>
+            <div>
+                <label for="id">會員編號:</label>
+                <input type="text" id="id" name="id" size="8">
+            </div>
+            <div>
+                <label for="name">姓名：</label>
+                <input type="text" id="name" name="name" size="8">
+            </div>
+            <div>
+                <label for="dept">寄送地址：</label>
+                <input type="text" id="dept" name="dept" size="16">
+            </div>
+            <div>
+                <label for="age">年齡：</label>
+                <input type="text" id="age" name="age" size="2">
+            </div>
+            <div>
+                <label for="tel">個人聯絡電話：</label>
+                <input type="text" id="tel" name="tel" size="10">
+            </div>
+            <div>
+                <label>是否捐贈發票：</label>
+                <input type="radio" name="another" value="yes" id="yes">
+                <label for="yes">是</label>
+                <input type="radio" name="another" value="no" id="no">
+                <label for="no">否</label>
+            </div>
+            <br>
+            <div>
+                <label for="travel">寄送方式：</label>
+                <select name="travel" id="travel" size="3">
+                    <option value="宅配" selected>宅配</option>
+                    <option value="快遞">快遞</option>
+                    <option value="自取">自取</option>
+                </select>
+            </div>
+            <div>
+                <label for="memo">備註：</label><br>
+                <textarea id="memo" name="memo" rows="4" cols="40"></textarea>
+            </div>
+            <br>
+            <div>
+                <input type="reset" value="清除重填">
+                <input type="submit" value="送出">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
