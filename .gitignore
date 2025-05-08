@@ -7,3 +7,4 @@
 plot.png
 *.pdf*
 *.log*
+.vscode/
