@@ -10,6 +10,8 @@ services:
         source: html
         target: /var/www/html
         read_only: true
+    depends_on:
+      - sqlserver
     restart: unless-stopped
 
   sqlserver:
@@ -17,10 +19,11 @@ services:
     container_name: sqlserver
     environment:
       ACCEPT_EULA: "Y"
-      # sa just works
-      MSSQL_SA_PASSWORD: "I!am@password"
+      # sa just works, but please create your own user
+      MSSQL_SA_PASSWORD: ${MSSQL_PASSWD}
       MSSQL_PID: Express
       MSSQL_AGENT_ENABLED: "true"
+      MSSQL_COLLATE: ${MSSQL_COLLATE}
     ports:
       - "1433:1433"
     volumes:

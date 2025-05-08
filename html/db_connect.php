@@ -3,7 +3,7 @@ header("Content-Type:text/html; charset=utf-8");
 $serverName = "sqlserver\SQLEXPRESS, 1433";
 $connectionInfo = array(
     "Database" => "northwind",
-    "UID" => "sa",
+    "UID" => "thedbuser",
     "PWD" => "I!am@password",
     "CharacterSet" => "UTF-8",
     "Encrypt" => "true",
@@ -16,5 +16,4 @@ if ($conn) {
     echo "Error!!!<br />";
     die(print_r(sqlsrv_errors(), true));
 }
-sqlsrv_close($conn);
 ?>

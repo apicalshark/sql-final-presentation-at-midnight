@@ -4,3 +4,6 @@
 *.odt*
 *.odp*
 *.~lock*
+plot.png
+*.pdf*
+*.log*
