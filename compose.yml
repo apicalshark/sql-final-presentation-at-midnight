@@ -1,0 +1,59 @@
+# version: '3.8' # version number is obsolete
+services:
+  web:
+    build: apache
+    container_name: web
+    ports:
+      - "80:80"
+    volumes:
+      - type: bind
+        source: html
+        target: /var/www/html
+        read_only: true
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+      mssql-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      # sa just works, but please create your own user later
+      MSSQL_SA_PASSWORD: ${MSSQL_PASSWD}
+      MSSQL_PID: Express
+      MSSQL_AGENT_ENABLED: "true"
+      MSSQL_COLLATE: ${MSSQL_COLLATE}
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserverdata:/var/opt/mssql
+    healthcheck:
+      test: /opt/mssql-tools18/bin/sqlcmd -U sa -P "$${MSSQL_SA_PASSWORD}" -C -Q "SELECT 1" -b -o /dev/null
+      interval: 3s
+      timeout: 2s
+      retries: 5
+      start_period: 3s
+    restart: unless-stopped
+
+  mssql-init:
+    build: mssql-tools
+    restart: "no"
+    environment:
+      MSSQL_SA_PASSWORD: ${MSSQL_PASSWD}
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    volumes:
+      - type: bind
+        source: sql
+        target: /scripts
+        read_only: true
+    command: >
+      /bin/sh -c '/opt/mssql-tools18/bin/sqlcmd -S sqlserver -U sa -C -P "$${MSSQL_SA_PASSWORD}" -i "/scripts/kickstart.sql"'
+
+volumes:
+  sqlserverdata:

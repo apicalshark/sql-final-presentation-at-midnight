@@ -1,0 +1,11 @@
+*.docx*
+*.sh*
+*.odt*
+*.odp*
+*.~lock*
+plot.png
+*.pdf*
+*.log*
+.vscode/
+.venv/
+tutorial/
